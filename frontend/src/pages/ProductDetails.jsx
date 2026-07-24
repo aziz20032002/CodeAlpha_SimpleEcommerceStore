@@ -16,7 +16,7 @@ function ProductDetails() {
         const response = await api.get(`/products/${id}`);
         setProduct(response.data);
       } catch {
-        setError("Produit introuvable.");
+        setError("Product not found.");
       } finally {
         setLoading(false);
       }
@@ -58,11 +58,11 @@ function ProductDetails() {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
     window.dispatchEvent(new Event("cart-updated"));
 
-    alert("Produit ajouté au panier");
+    alert("Product added to cart");
   };
 
   if (loading) {
-    return <div className="app-shell"><section className="page-section"><p>Chargement du produit...</p></section></div>;
+    return <div className="app-shell"><section className="page-section"><p>Loading product...</p></section></div>;
   }
 
   if (error) {
@@ -70,12 +70,12 @@ function ProductDetails() {
   }
 
   if (!product) {
-    return <div className="app-shell"><section className="page-section"><p>Produit introuvable.</p></section></div>;
+    return <div className="app-shell"><section className="page-section"><p>Product not found.</p></section></div>;
   }
 
   return (
     <div className="app-shell">
-      <Link className="back-link" to="/products">← Retour aux produits</Link>
+      <Link className="back-link" to="/products">← Back to Products</Link>
       <section className="detail-card">
         <div className="detail-image-wrap">
           <ProductImage src={product.image_url} alt={product.name} productKey={product.id} className="detail-image" placeholderClassName="detail-placeholder" priority />
@@ -87,13 +87,13 @@ function ProductDetails() {
           <div className="price-box">
             <span className="price-value">{Number(product.price).toFixed(2)} DT</span>
             <span className={`stock-badge ${Number(product.stock || 0) === 0 ? "stock-out" : Number(product.stock || 0) <= 5 ? "stock-low" : "stock-in"}`}>
-              {Number(product.stock || 0) === 0 ? "Rupture de stock" : Number(product.stock || 0) <= 5 ? "Stock faible" : "Disponible en stock"}
+              {Number(product.stock || 0) === 0 ? "Out of Stock" : Number(product.stock || 0) <= 5 ? "Low Stock" : "In Stock"}
             </span>
           </div>
 
           <div className="cart-actions">
             <button className="btn btn-primary btn-large" type="button" onClick={handleAddToCart} disabled={Number(product.stock || 0) === 0}>
-              {Number(product.stock || 0) === 0 ? "Produit indisponible" : "Ajouter au panier"}
+              {Number(product.stock || 0) === 0 ? "Product Unavailable" : "Add to Cart"}
             </button>
           </div>
         </div>

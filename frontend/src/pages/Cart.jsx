@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../services/api";
 import ProductImage from "../components/ProductImage";
+import { getEnglishMessage } from "../services/messages";
 
 function Cart() {
   const [cart, setCart] = useState(() => {
@@ -53,7 +54,7 @@ function Cart() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-      setMessage("Vous devez vous connecter pour passer une commande.");
+      setMessage("You must be signed in to place an order.");
       return;
     }
 
@@ -78,10 +79,10 @@ function Cart() {
 
       setCart([]);
       localStorage.removeItem("cart");
-      setMessage(response.data.message || "Commande créée avec succès");
+      setMessage(getEnglishMessage(response.data.message, "Order placed successfully"));
     } catch (error) {
       setMessage(
-        error.response?.data?.message || "Impossible de passer la commande."
+        getEnglishMessage(error.response?.data?.message, "Unable to place the order.")
       );
     } finally {
       setIsLoading(false);
@@ -96,17 +97,17 @@ function Cart() {
   return (
     <div className="app-shell">
       <section className="page-section">
-        <h1>Mon panier</h1>
+        <h1>My Cart</h1>
 
-        {message ? <p className={`form-message ${message.includes("succès") ? "success-message" : "error-message"}`}>{message}</p> : null}
+        {message ? <p className={`form-message ${message.includes("successfully") ? "success-message" : "error-message"}`}>{message}</p> : null}
 
         {cart.length === 0 ? (
           <div className="empty-state">
             <span className="empty-icon" aria-hidden="true">⌑</span>
-            <h2>Votre panier est vide</h2>
-            <p>Découvrez notre catalogue et trouvez votre prochain produit.</p>
+            <h2>Your cart is empty</h2>
+            <p>Explore our catalog and find your next product.</p>
             <Link className="btn btn-primary" to="/products">
-              Découvrir les produits
+              Explore Products
             </Link>
           </div>
         ) : (
@@ -124,18 +125,18 @@ function Cart() {
                     </div>
                     <div className="cart-item-info">
                       <h2>{item.name}</h2>
-                      <p>Prix unitaire : {price.toFixed(2)} DT</p>
+                      <p>Unit Price: {price.toFixed(2)} DT</p>
                       <strong className="item-subtotal">{subtotal.toFixed(2)} DT</strong>
                     </div>
 
                     <div className="cart-actions">
-                      <div className="quantity-control" aria-label={`Quantité de ${item.name}`}>
-                        <button className="quantity-btn" aria-label="Diminuer la quantité" type="button" onClick={() => updateQuantity(item.id, -1)}>−</button>
+                      <div className="quantity-control" aria-label={`Quantity of ${item.name}`}>
+                        <button className="quantity-btn" aria-label="Decrease quantity" type="button" onClick={() => updateQuantity(item.id, -1)}>−</button>
                         <span className="quantity-value">{quantity}</span>
-                        <button className="quantity-btn" aria-label="Augmenter la quantité" type="button" onClick={() => updateQuantity(item.id, 1)}>+</button>
+                        <button className="quantity-btn" aria-label="Increase quantity" type="button" onClick={() => updateQuantity(item.id, 1)}>+</button>
                       </div>
                       <button className="btn btn-danger" type="button" onClick={() => removeFromCart(item.id)}>
-                        Supprimer
+                        Remove
                       </button>
                     </div>
                   </div>
@@ -144,9 +145,9 @@ function Cart() {
             </div>
 
             <aside className="cart-summary">
-              <h3>Résumé de la commande</h3>
+              <h3>Order Summary</h3>
               <div className="summary-row">
-                <span>Sous-total</span>
+                <span>Subtotal</span>
                 <strong>{total.toFixed(2)} DT</strong>
               </div>
               <div className="summary-row">
@@ -154,10 +155,10 @@ function Cart() {
                 <strong>{total.toFixed(2)} DT</strong>
               </div>
               <button className="btn btn-primary btn-full" type="button" onClick={handleCheckout} disabled={isLoading}>
-                {isLoading ? "Commande en cours..." : "Passer la commande"}
+                {isLoading ? "Placing order..." : "Place Order"}
               </button>
               <Link className="btn btn-secondary btn-full" to="/products">
-                Continuer mes achats
+                Continue Shopping
               </Link>
             </aside>
           </div>

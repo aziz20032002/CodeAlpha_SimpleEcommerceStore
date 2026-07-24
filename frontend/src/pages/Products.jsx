@@ -14,7 +14,7 @@ function Products() {
         const response = await api.get("/products");
         setProducts(response.data);
       } catch {
-        setError("Impossible de charger les produits.");
+        setError("Unable to load products.");
       } finally {
         setLoading(false);
       }
@@ -30,7 +30,7 @@ function Products() {
   }, [products, search]);
 
   if (loading) {
-    return <div className="app-shell"><section className="page-section loading-state"><span className="loader" /><p>Chargement des produits…</p></section></div>;
+    return <div className="app-shell"><section className="page-section loading-state"><span className="loader" /><p>Loading products…</p></section></div>;
   }
 
   if (error) {
@@ -40,26 +40,26 @@ function Products() {
   return (
     <main className="app-shell">
       <section className="catalog-heading">
-        <span className="eyebrow">Notre catalogue</span>
-        <h1>Découvrez nos produits</h1>
-        <p>Une sélection de produits technologiques pour tous vos besoins.</p>
+        <span className="eyebrow">Our Catalog</span>
+        <h1>Explore Our Products</h1>
+        <p>A selection of technology products for all your needs.</p>
       </section>
 
       <section className="page-section">
         <div className="catalog-toolbar">
           <label className="search-field">
-            <span className="sr-only">Rechercher un produit</span>
+            <span className="sr-only">Search products</span>
             <span aria-hidden="true">⌕</span>
-            <input type="search" placeholder="Rechercher un produit…" value={search} onChange={(event) => setSearch(event.target.value)} />
+            <input type="search" placeholder="Search products…" value={search} onChange={(event) => setSearch(event.target.value)} />
           </label>
-          <span className="results-count">{filteredProducts.length} produit{filteredProducts.length !== 1 ? "s" : ""}</span>
+          <span className="results-count">{filteredProducts.length} product{filteredProducts.length !== 1 ? "s" : ""}</span>
         </div>
 
         {filteredProducts.length === 0 ? (
           <div className="empty-state">
             <span className="empty-icon" aria-hidden="true">⌕</span>
-            <h2>{products.length === 0 ? "Aucun produit disponible" : "Aucun résultat"}</h2>
-            <p>{products.length === 0 ? "Notre catalogue sera bientôt disponible." : "Essayez un autre nom de produit."}</p>
+            <h2>{products.length === 0 ? "No products available" : "No results found"}</h2>
+            <p>{products.length === 0 ? "Our catalog will be available soon." : "Try searching for another product name."}</p>
           </div>
         ) : (
           <div className="product-grid">

@@ -3,7 +3,7 @@ import ProductImage from "./ProductImage";
 
 function ProductCard({ product, priority = false }) {
   const stock = Number(product.stock || 0);
-  const stockLabel = stock === 0 ? "Rupture de stock" : stock <= 5 ? "Stock faible" : "En stock";
+  const stockLabel = stock === 0 ? "Out of Stock" : stock <= 5 ? "Low Stock" : "In Stock";
   const stockClass = stock === 0 ? "stock-out" : stock <= 5 ? "stock-low" : "stock-in";
 
   return (
@@ -18,7 +18,7 @@ function ProductCard({ product, priority = false }) {
         <div className="product-footer">
           <strong>{Number(product.price).toFixed(2)} DT</strong>
           <Link className="btn btn-primary" to={`/products/${product.id}`}>
-            Voir les détails <span aria-hidden="true">→</span>
+            View Details <span aria-hidden="true">→</span>
           </Link>
         </div>
       </div>

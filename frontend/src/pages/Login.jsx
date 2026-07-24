@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
+import { getEnglishMessage } from "../services/messages";
 
 function Login() {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ function Login() {
       navigate("/products");
     } catch (err) {
       setError(
-        err.response?.data?.message || "Une erreur est survenue lors de la connexion."
+        getEnglishMessage(err.response?.data?.message, "An error occurred while signing in.")
       );
     }
   };
@@ -41,9 +42,9 @@ function Login() {
     <div className="app-shell">
       <section className="form-card">
         <div className="auth-mark">CA</div>
-        <p className="eyebrow">Bienvenue</p>
-        <h1>Bon retour !</h1>
-        <p className="form-intro">Connectez-vous à votre compte CodeAlpha Store.</p>
+        <p className="eyebrow">Welcome</p>
+        <h1>Welcome Back!</h1>
+        <p className="form-intro">Sign in to your CodeAlpha Store account.</p>
         <form className="auth-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email</label>
@@ -58,7 +59,7 @@ function Login() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="password">Mot de passe</label>
+            <label htmlFor="password">Password</label>
             <input
               id="password"
               type="password"
@@ -70,12 +71,12 @@ function Login() {
           </div>
 
           <button className="btn btn-primary btn-full" type="submit">
-            Se connecter
+            Sign In
           </button>
         </form>
 
         <p className="form-link">
-          Pas encore de compte ? <Link to="/register">Créer un compte</Link>
+          Don&apos;t have an account? <Link to="/register">Create Account</Link>
         </p>
         {error ? <p className="form-message error-message">{error}</p> : null}
       </section>

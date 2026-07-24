@@ -38,27 +38,27 @@ const Navbar = () => {
 
   return (
     <header className="site-header">
-      <nav className="navbar" aria-label="Navigation principale">
+      <nav className="navbar" aria-label="Main navigation">
         <Link className="navbar-brand" to="/" onClick={closeMenu}>
           <span className="brand-mark">CA</span>
           <span>CodeAlpha <strong>Store</strong></span>
         </Link>
-        <button className="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
+        <button className="menu-toggle" type="button" aria-label="Open menu" aria-expanded={menuOpen} onClick={() => setMenuOpen((open) => !open)}>
           <span /><span /><span />
         </button>
         <div className={`navbar-links ${menuOpen ? "is-open" : ""}`}>
-          <NavLink className={navClass} to="/" onClick={closeMenu}>Accueil</NavLink>
-          <NavLink className={navClass} to="/products" onClick={closeMenu}>Produits</NavLink>
-          <NavLink className={navClass} to="/cart" onClick={closeMenu}>Panier <span className="cart-count" aria-label={`${cartCount} article${cartCount !== 1 ? "s" : ""} dans le panier`}>{cartCount}</span></NavLink>
+          <NavLink className={navClass} to="/" onClick={closeMenu}>Home</NavLink>
+          <NavLink className={navClass} to="/products" onClick={closeMenu}>Products</NavLink>
+          <NavLink className={navClass} to="/cart" onClick={closeMenu}>Cart <span className="cart-count" aria-label={`${cartCount} item${cartCount !== 1 ? "s" : ""} in cart`}>{cartCount}</span></NavLink>
           {isLoggedIn ? (
             <>
-              <NavLink className={navClass} to="/orders" onClick={closeMenu}>Mes commandes</NavLink>
-              <button type="button" className="btn btn-logout" onClick={handleLogout}>Déconnexion</button>
+              <NavLink className={navClass} to="/orders" onClick={closeMenu}>My Orders</NavLink>
+              <button type="button" className="btn btn-logout" onClick={handleLogout}>Logout</button>
             </>
           ) : (
             <div className="auth-nav">
-              <NavLink className="login-link" to="/login" onClick={closeMenu}>Connexion</NavLink>
-              <NavLink className="btn btn-nav-primary" to="/register" onClick={closeMenu}>Inscription</NavLink>
+              <NavLink className="login-link" to="/login" onClick={closeMenu}>Login</NavLink>
+              <NavLink className="btn btn-nav-primary" to="/register" onClick={closeMenu}>Sign Up</NavLink>
             </div>
           )}
         </div>

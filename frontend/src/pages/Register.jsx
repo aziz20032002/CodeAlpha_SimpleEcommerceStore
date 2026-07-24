@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api";
+import { getEnglishMessage } from "../services/messages";
 
 function Register() {
   const navigate = useNavigate();
@@ -30,14 +31,14 @@ function Register() {
     try {
       const response = await api.post("/auth/register", formData);
 
-      setMessage(response.data.message);
+      setMessage(getEnglishMessage(response.data.message, "Account created successfully"));
 
       setTimeout(() => {
         navigate("/login");
       }, 1000);
     } catch (err) {
       setError(
-        err.response?.data?.message || "Une erreur est survenue lors de l'inscription."
+        getEnglishMessage(err.response?.data?.message, "An error occurred while creating your account.")
       );
     }
   };
@@ -46,12 +47,12 @@ function Register() {
     <div className="app-shell">
       <section className="form-card">
         <div className="auth-mark">CA</div>
-        <p className="eyebrow">Bienvenue chez nous</p>
-        <h1>Créer votre compte</h1>
-        <p className="form-intro">Rejoignez CodeAlpha Store et commencez vos achats.</p>
+        <p className="eyebrow">Join Us</p>
+        <h1>Create Your Account</h1>
+        <p className="form-intro">Join CodeAlpha Store and start shopping.</p>
         <form className="auth-form" onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="name">Nom</label>
+            <label htmlFor="name">Name</label>
             <input
               id="name"
               type="text"
@@ -75,7 +76,7 @@ function Register() {
           </div>
 
           <div className="form-group">
-            <label htmlFor="register-password">Mot de passe</label>
+            <label htmlFor="register-password">Password</label>
             <input
               id="register-password"
               type="password"
@@ -87,12 +88,12 @@ function Register() {
           </div>
 
           <button className="btn btn-primary btn-full" type="submit">
-            Créer mon compte
+            Create Account
           </button>
         </form>
 
         <p className="form-link">
-          Déjà un compte ? <Link to="/login">Se connecter</Link>
+          Already have an account? <Link to="/login">Sign In</Link>
         </p>
         {message ? <p className="form-message success-message">{message}</p> : null}
         {error ? <p className="form-message error-message">{error}</p> : null}

@@ -6,18 +6,18 @@ function Footer() {
       <div className="footer-main">
         <div className="footer-about">
           <Link className="footer-brand" to="/"><span className="brand-mark">CA</span><span>CodeAlpha Store</span></Link>
-          <p>Votre boutique tech moderne.</p>
+          <p>Your modern tech store.</p>
         </div>
-        <nav className="footer-column" aria-label="Navigation du pied de page">
+        <nav className="footer-column" aria-label="Footer navigation">
           <h2>Navigation</h2>
-          <Link to="/">Accueil</Link>
-          <Link to="/products">Produits</Link>
-          <Link to="/cart">Panier</Link>
+          <Link to="/">Home</Link>
+          <Link to="/products">Products</Link>
+          <Link to="/cart">Cart</Link>
         </nav>
-        <nav className="footer-column" aria-label="Liens du compte">
-          <h2>Compte</h2>
-          <Link to="/login">Connexion</Link>
-          <Link to="/orders">Mes commandes</Link>
+        <nav className="footer-column" aria-label="Account links">
+          <h2>Account</h2>
+          <Link to="/login">Login</Link>
+          <Link to="/orders">My Orders</Link>
         </nav>
       </div>
       <div className="footer-bottom">

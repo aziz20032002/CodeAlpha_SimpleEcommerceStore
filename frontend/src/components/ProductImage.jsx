@@ -12,7 +12,7 @@ function ProductImage({ src, alt, productKey = "", className = "", placeholderCl
   const [failedSource, setFailedSource] = useState("");
   const [loadedSource, setLoadedSource] = useState("");
   const visual = useMemo(() => {
-    const label = String(alt || "Produit").trim();
+    const label = String(alt || "Product").trim();
     const seed = `${productKey}-${label}`;
     const hash = [...seed].reduce((total, character) => total + character.charCodeAt(0), 0);
     const initials = label
@@ -30,7 +30,7 @@ function ProductImage({ src, alt, productKey = "", className = "", placeholderCl
       className={`product-placeholder ${placeholderClassName}`}
       style={{ "--placeholder-start": visual.colors[0], "--placeholder-end": visual.colors[1] }}
       role="img"
-      aria-label={`Visuel de remplacement pour ${alt}`}
+      aria-label={`Placeholder image for ${alt}`}
     >
       <span className="placeholder-orbit" aria-hidden="true" />
       <span className="placeholder-mark">{visual.initials || "CA"}</span>
