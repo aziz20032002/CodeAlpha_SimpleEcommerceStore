@@ -79,3 +79,28 @@ CodeAlpha_SimpleEcommerceStore/
 ├── .gitignore
 └── README.md
 ```
+## Screenshots
+
+### Home Page
+
+![Home Page](screenshots/home.png)
+
+### Products
+
+![Products Page](screenshots/products.png)
+
+### Product Details
+
+![Product Details](screenshots/product-details.png)
+
+### Login
+
+![Login Page](screenshots/login.png)
+
+### Shopping Cart
+
+![Shopping Cart](screenshots/cart.png)
+
+### My Orders
+
+![My Orders](screenshots/orders.png)
